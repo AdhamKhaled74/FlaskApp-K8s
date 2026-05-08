@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadate:
+  name: mysql-config
+  namespace: flask-project
+data:
+  MYSQL_DATABASE_DB: "BucketList"
