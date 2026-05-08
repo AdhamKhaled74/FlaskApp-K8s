@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS BucketList;
+
+USE BucketList;
+
+CREATE TABLE IF NOT EXISTS items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+INSERT INTO items(name) VALUES ('Kubernetes Project');
