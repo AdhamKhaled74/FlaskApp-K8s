@@ -29,11 +29,11 @@ spec:
                   name: mysql-secret
                   key: MYSQL_ROOT_PASSWORD
 
-            - name: MYSQL_DATABASE
+            - name: MYSQL_DATABASE_DB
               valueFrom:
                 configMapKeyRef:
                   name: mysql-config
-                  key: MYSQL_DATABASE
+                  key: MYSQL_DATABASE_DB 
 
           volumeMounts:
             - name: mysql-storage
