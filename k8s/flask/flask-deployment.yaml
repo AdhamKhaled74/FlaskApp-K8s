@@ -12,9 +12,7 @@ spec:
     metadata:
       labels:
         app: flaskapp-pod
-    spec:
-        imagePullSecrets:
-          - name: regcred   
+    spec: 
         containers:
           - name: flask-app-pods           
             image: adhamm74/flaskapp:v1          
