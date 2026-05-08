@@ -17,7 +17,7 @@ spec:
           - name: regcred   
         containers:
           - name: flask-app-pods           
-            image: adhamm74/flaskapp          
+            image: adhamm74/flaskapp:v1          
             imagePullPolicy: Always
             ports:
               - containerPort: 5002   
