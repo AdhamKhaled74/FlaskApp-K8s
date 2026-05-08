@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: flask-limitrange
+  namespace: flask-project
+spec:
+  limits:
+    - type: Container
+      default:          # applied if pod doesn't set limits
+        memory: 128Mi
+        cpu: 100m
+      defaultRequest:   # applied if pod doesn't set requests
+        memory: 128Mi
+        cpu: 100m
+      max:              # no pod can exceed this
+        memory: 512Mi
+        cpu: 500m
