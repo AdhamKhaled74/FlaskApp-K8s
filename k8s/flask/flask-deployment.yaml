@@ -12,51 +12,57 @@ spec:
     metadata:
       labels:
         app: flaskapp-pod
-    spec: 
-        containers:
-          - name: flask-app-pods           
-            image: adhamm74/flaskapp:v1          
-            imagePullPolicy: Always
-            ports:
-              - containerPort: 5002   
-            env:
-              - name: MYSQL_DATABASE_HOST
-                valueFrom:
-                  configMapKeyRef:
-                    name: flask-config         
-                    key: MYSQL_DATABASE_HOST 
-              - name: MYSQL_DATABASE_DB
-                valueFrom:
-                  configMapKeyRef:
-                    name: flask-config         
-                    key: MYSQL_DATABASE_DB
-              - name: MYSQL_DATABASE_USER
-                valueFrom:
-                  configMapKeyRef:
-                    name: flask-config         
-                    key: MYSQL_DATABASE_USER                            
-              - name: MYSQL_DATABASE_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: mysql-secret  
-                    key: MYSQL_DATABASE_PASSWORD 
-            readinessProbe:
-              httpGet:
-                path: /
-                port: 5002
-              initialDelaySeconds: 20
-              periodSeconds: 10
+    spec:
+      containers:
+        - name: flask-app-pods
+          image: adhamm74/flaskapp:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5002
+          env:
+            - name: MYSQL_DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: MYSQL_DATABASE_HOST
+            - name: MYSQL_DATABASE_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: MYSQL_DATABASE_DB
+            - name: MYSQL_DATABASE_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: MYSQL_DATABASE_USER
+            - name: MYSQL_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_DATABASE_PASSWORD
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5002
+            initialDelaySeconds: 20
+            periodSeconds: 10
 
-            livenessProbe:
-              httpGet:
-                path: /
-                port: 5002
-              initialDelaySeconds: 40
-              periodSeconds: 20
-            resources:
-              requests:
-                memory: "128Mi"
-                cpu: "100m"
-              limits:
-                memory: "512Mi"
-                cpu: "500m"              
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5002
+            initialDelaySeconds: 40
+            periodSeconds: 20
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 5002
+            failureThreshold: 30
+            periodSeconds: 10

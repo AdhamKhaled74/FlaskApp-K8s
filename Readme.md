@@ -6,6 +6,8 @@ A production-style Kubernetes project that deploys a Python Flask web applicatio
 
 # Project Overview
 
+![Project Architecture](assets/projectArch.png)
+
 This project demonstrates how to deploy a scalable Flask application connected to a persistent MySQL database on Kubernetes.
 
 The architecture includes:
@@ -179,7 +181,12 @@ docker login
 docker push adhamm74/flaskapp:v1
 
 docker push adhamm74/mysql:v1
+
 ```
+
+## Docker Images in DockerHub
+
+![Docker Images](assets/dockerImages.png)
 
 ---
 
@@ -240,6 +247,9 @@ kubectl create secret docker-registry regcred \
 Apply resources in the following order:
 
 ```bash
+
+kubectl apply -f k8s/namespace.yaml
+
 kubectl apply -f k8s/configmaps/
 
 kubectl apply -f k8s/secrets/
@@ -250,12 +260,22 @@ kubectl apply -f k8s/database/
 
 kubectl apply -f k8s/flask/
 
-kubectl apply -f k8s/ingress/
+kubectl apply -f k8s/ingress.yaml
 
-kubectl apply -f k8s/network-policy/
+kubectl apply -f k8s/network-policy.yaml
 
-kubectl apply -f k8s/limits/
+kubectl apply -f k8s/limit-range.yaml
 ```
+
+# All Running Kubernetes Resources
+
+![All Running Kubernetes Resources](assets/All_Resources.png)
+
+---
+
+# Running App (Flask App)
+
+![Running App](assets/RunningApp.png)
 
 ---
 
@@ -407,7 +427,7 @@ kubectl logs POD_NAME -n flask-project
 ## Using NodePort
 
 ```text
-http://NODE_IP:30080
+http://NODE_IP:32707
 ```
 
 ## Using Ingress
