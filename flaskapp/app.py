@@ -3,7 +3,7 @@ from flaskext.mysql import MySQL
 import os
 import time
 
-app = Flask()
+app = Flask(__name__)
 
 # MySQL Configuration from Environment Variables
 app.config['MYSQL_DATABASE_HOST'] = os.getenv('MYSQL_DATABASE_HOST', 'db-service')
