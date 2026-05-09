@@ -1,4 +1,5 @@
-Flask==3.0.0
+Flask==2.2.5
 flask-mysql==1.5.2
 PyMySQL==1.1.0
 mysqlclient==2.2.0
+Werkzeug==2.2.3
